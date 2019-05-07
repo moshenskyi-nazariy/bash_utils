@@ -1,0 +1,65 @@
+import os
+from os import path
+
+# File paths
+downloads_folder = "/home/nazar/Downloads"
+papers_path = '/papers'
+windows_path = '/windows'
+archives_path = '/archives'
+images_path = '/images'
+videos_path = '/videos'
+ms_office_path = '/ms_office'
+texts_path = '/txt'
+audio_path = '/audio'
+xml_path = '/xml'
+android_path = '/android-files'
+certificates_path = '/certificates'
+
+
+def move_to_folder(old_name, new_name, folder_name):
+    destination_folder = downloads_folder + folder_name
+    create_folder(destination_folder)
+    os.rename(old_name, downloads_folder + new_name)
+
+
+def create_folder(folder_name):
+    if not os.path.exists(folder_name):
+        os.mkdir(folder_name)
+
+
+for file_name in os.listdir(downloads_folder):
+    fully_qualified_file_name = downloads_folder + '/' + file_name
+
+    raw_name, file_extension = os.path.splitext(file_name)
+    if file_extension in ['.pdf', '.djvu', '.fb2']:
+        move_to_folder(fully_qualified_file_name, papers_path + '/' + file_name, papers_path)
+
+    if file_extension in ['.msi', '.exe', '.bat']:
+        move_to_folder(fully_qualified_file_name, windows_path + '/' + file_name, windows_path)
+
+    if file_extension in ['.zip', '.rar', '.gz', '.deb', '.xz', '.jar', '.rpm']:
+        move_to_folder(fully_qualified_file_name, archives_path + '/' + file_name, archives_path)
+
+    if file_extension in ['.jpg', '.jpeg', '.png', '.svg', '.gif']:
+        move_to_folder(fully_qualified_file_name, images_path + '/' + file_name, images_path)
+
+    if file_extension in ['.mov', '.mp4', '.m3u', '.m3u8']:
+        move_to_folder(fully_qualified_file_name, videos_path + '/' + file_name, videos_path)
+
+    if file_extension in ['.doc', '.docx', '.ppt', '.pptx', '.xls', '.xlsx']:
+        move_to_folder(fully_qualified_file_name, ms_office_path + '/' + file_name, ms_office_path)
+
+    if file_extension == '.txt':
+        move_to_folder(fully_qualified_file_name, texts_path + '/' + file_name, texts_path)
+
+    if file_extension in ['.mp3', '.wav', '.pcm', '.3gp', '.aac', '.ogg']:
+        move_to_folder(fully_qualified_file_name, audio_path + '/' + file_name, audio_path)
+    
+    if file_extension == '.xml':
+	move_to_folder(fully_qualified_file_name, xml_path + '/' + file_name, xml_path)
+
+    if file_extension in ['.apk', '.aidl', '.json']:
+	move_to_folder(fully_qualified_file_name, android_path + '/' + file_name, android_path)
+
+    if file_extension in ['.jks', '.pem', '.crt', '.cert', '.cer', '.der', '.p7b', '.p7c', '.pfx', '.p12', '.key']:
+        move_to_folder(fully_qualified_file_name, certificates_path + '/' + file_name, certificates_path)
