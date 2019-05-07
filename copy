@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+copy_to_clipboard_cmd="cat ${1} | xclip -sel clip"
+eval ${copy_to_clipboard_cmd}
